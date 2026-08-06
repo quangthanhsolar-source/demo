@@ -11,6 +11,23 @@ npm run dev
 
 Mở [http://localhost:3000](http://localhost:3000).
 
+## Deploy Vercel (tránh 404 NOT_FOUND)
+
+Cấu trúc bắt buộc (đã đúng trong repo này):
+
+- `package.json` ở **root** repo (không nằm trong thư mục con)
+- App Router nằm ở **`src/app/`** (không phải `app/` ở root)
+- Trang chủ: `src/app/page.tsx`
+
+Trong Vercel Project Settings:
+
+1. **Root Directory**: để trống / `.` (không đặt `src`, `app`, hay thư mục con khác)
+2. **Framework Preset**: Next.js
+3. **Production Branch**: `main`
+4. Redeploy sau khi merge code mới
+
+Nếu vẫn thấy `404 NOT_FOUND` kiểu trang trắng của Vercel: thường là Root Directory sai hoặc URL deployment cũ — vào Deployments → Redeploy bản mới nhất.
+
 ## Tài khoản test
 
 - Email: `admin@baoduy.com`
