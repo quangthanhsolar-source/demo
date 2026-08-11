@@ -10,8 +10,8 @@ export function Card({
 }) {
   return (
     <div
-      className={`bg-white rounded-xl shadow-sm border ${className}`}
-      style={{ borderColor: T.border }}
+      className={`rounded-[var(--r)] ${className}`}
+      style={{ background: T.surface }}
     >
       {children}
     </div>

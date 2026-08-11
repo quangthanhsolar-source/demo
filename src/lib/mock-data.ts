@@ -105,16 +105,16 @@ export const quotationList: Quotation[] = [
 ];
 
 export const quoteStatusColor: Record<string, StatusColors> = {
-  "Đang chờ": { bg: "#FEF3C7", text: "#B45309" },
-  "Đã chốt": { bg: "#D1FAE5", text: "#047857" },
-  "Đã hủy": { bg: "#FEE2E2", text: "#B91C1C" },
+  "Đang chờ": { bg: "#fff3c9", text: "#8a6d00" },
+  "Đã chốt": { bg: "#d4f85c", text: "#111214" },
+  "Đã hủy": { bg: "#ffe7df", text: "#c2341a" },
 };
 
 export const careStatusColor: Record<string, StatusColors> = {
-  "Mới": { bg: "#DBEAFE", text: "#1D4ED8" },
-  "Đã tư vấn": { bg: "#EDE9FE", text: "#6D28D9" },
-  "Khảo sát": { bg: "#FEF3C7", text: "#B45309" },
-  "Đã ký hợp đồng": { bg: "#D1FAE5", text: "#047857" },
+  "Mới": { bg: "#eceef0", text: "#3b3e44" },
+  "Đã tư vấn": { bg: "#eef9c9", text: "#111214" },
+  "Khảo sát": { bg: "#fff3c9", text: "#8a6d00" },
+  "Đã ký hợp đồng": { bg: "#d4f85c", text: "#111214" },
 };
 
 export const initialCustomers: Customer[] = [

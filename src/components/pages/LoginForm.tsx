@@ -2,15 +2,15 @@
 
 import { useState, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, Mail, Sun } from "lucide-react";
-import { Card } from "@/components/ui/Card";
-import { FormField, inputCls } from "@/components/ui/FormField";
+import { Eye, EyeOff, Lock, Mail, Sun } from "lucide-react";
+import { VALID_EMAIL, VALID_PASS } from "@/lib/auth";
 import { T } from "@/lib/tokens";
 
 export function LoginForm() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [email, setEmail] = useState(VALID_EMAIL);
+  const [pass, setPass] = useState(VALID_PASS);
+  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -24,10 +24,10 @@ export function LoginForm() {
         body: JSON.stringify({ email, password: pass }),
       });
       if (!res.ok) {
-        setError("Email hoặc mật khẩu không đúng.");
+        setError("Email hoặc mật khẩu chưa đúng. Thử lại nhé.");
         return;
       }
-      router.push("/dashboard/bao-gia/tao");
+      router.push("/dashboard");
       router.refresh();
     } catch {
       setError("Không thể đăng nhập. Vui lòng thử lại.");
@@ -41,78 +41,117 @@ export function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm">
-        <div className="flex flex-col items-center mb-6">
+    <div
+      className="min-h-[100dvh] w-full flex flex-col items-center justify-center px-6 py-8"
+      style={{ background: T.canvas }}
+    >
+      <div
+        className="w-[58px] h-[58px] rounded-[18px] grid place-items-center"
+        style={{ background: T.ink, color: T.lime }}
+      >
+        <Sun className="w-7 h-7" />
+      </div>
+
+      <h1 className="font-display text-[30px] font-bold text-center leading-tight mt-5">
+        <span style={{ color: "#c4c7cc", fontWeight: 500 }}>
+          VP HCM – Quang Thanh Solar
+        </span>
+        <br />
+        Báo giá NLMT
+      </h1>
+      <p className="mt-2 text-sm" style={{ color: T.muted }}>
+        Hệ thống quản lý năng lượng mặt trời
+      </p>
+
+      <div
+        className="w-full max-w-[420px] mt-7 rounded-3xl px-6 py-7"
+        style={{ background: T.panel, boxShadow: T.lift }}
+      >
+        <h2 className="font-display text-xl font-bold mb-5">Đăng nhập</h2>
+
+        {error && (
           <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center mb-3 shadow-sm"
-            style={{ background: "linear-gradient(135deg,#FBBF24,#F97316)" }}
+            className="rounded-xl px-3.5 py-2.5 text-[13px] mb-3.5"
+            style={{ background: T.redSoft, color: "#c2341a" }}
           >
-            <Sun className="w-7 h-7 text-white" />
+            {error}
           </div>
-          <h1 className="text-lg font-bold text-center">
-            VP HCM - Quang Thanh Solar
-          </h1>
-          <p className="text-sm text-center mt-1" style={{ color: T.muted }}>
-            Hệ thống Quản lý Báo giá NLMT
-          </p>
+        )}
+
+        <label
+          className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5"
+          style={{ color: T.muted }}
+        >
+          Email
+        </label>
+        <div className="relative mb-3.5">
+          <Mail
+            className="w-[17px] h-[17px] absolute left-3.5 top-1/2 -translate-y-1/2"
+            style={{ color: T.muted }}
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoComplete="username"
+            className="w-full h-12 rounded-[14px] pl-11 pr-4 text-[15px] border border-transparent focus:outline-none focus:border-[var(--ink)] focus:bg-white"
+            style={{ background: T.surface }}
+          />
         </div>
 
-        <Card className="p-6">
-          <div>
-            <FormField label="Email">
-              <div className="relative">
-                <Mail
-                  className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2"
-                  style={{ color: T.muted }}
-                />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="admin@baoduy.com"
-                  className={inputCls + " pl-9"}
-                  style={{ borderColor: T.border }}
-                />
-              </div>
-            </FormField>
-            <FormField label="Mật khẩu">
-              <div className="relative">
-                <Lock
-                  className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2"
-                  style={{ color: T.muted }}
-                />
-                <input
-                  type="password"
-                  value={pass}
-                  onChange={(e) => setPass(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="••••••••"
-                  className={inputCls + " pl-9"}
-                  style={{ borderColor: T.border }}
-                />
-              </div>
-            </FormField>
+        <label
+          className="block text-[11px] font-bold uppercase tracking-[0.07em] mb-1.5"
+          style={{ color: T.muted }}
+        >
+          Mật khẩu
+        </label>
+        <div className="relative mb-5">
+          <Lock
+            className="w-[17px] h-[17px] absolute left-3.5 top-1/2 -translate-y-1/2"
+            style={{ color: T.muted }}
+          />
+          <input
+            type={showPass ? "text" : "password"}
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoComplete="current-password"
+            className="w-full h-12 rounded-[14px] pl-11 pr-12 text-[15px] border border-transparent focus:outline-none focus:border-[var(--ink)] focus:bg-white"
+            style={{ background: T.surface }}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPass((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1"
+            style={{ color: T.muted }}
+            aria-label="Hiện mật khẩu"
+          >
+            {showPass ? (
+              <Eye className="w-4 h-4" />
+            ) : (
+              <EyeOff className="w-4 h-4" />
+            )}
+          </button>
+        </div>
 
-            {error && <div className="text-xs text-red-600 mb-3">{error}</div>}
-
-            <button
-              type="button"
-              onClick={() => void submit()}
-              disabled={loading}
-              className="w-full py-2.5 rounded-lg text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-60"
-              style={{ backgroundColor: T.primary }}
-            >
-              {loading ? "Đang đăng nhập..." : "Đăng nhập"}
-            </button>
-          </div>
-        </Card>
-
-        <p className="text-center text-xs mt-6" style={{ color: T.muted }}>
-          © 2026 Quang Thanh Solar - Giải pháp Năng lượng Mặt trời
-        </p>
+        <button
+          type="button"
+          onClick={() => void submit()}
+          disabled={loading}
+          className="w-full h-12 rounded-full text-white text-sm font-bold transition-opacity disabled:opacity-60"
+          style={{ background: T.ink }}
+        >
+          {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+        </button>
       </div>
+
+      <p
+        className="mt-7 text-[11px] text-center uppercase tracking-[0.04em]"
+        style={{ color: T.muted2 }}
+      >
+        © 2026 Quang Thanh Solar – Giải pháp Năng lượng Mặt trời
+      </p>
     </div>
   );
 }

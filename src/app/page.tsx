@@ -1,6 +1,9 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { AUTH_COOKIE } from "@/lib/auth";
 
-/** Open the interactive HTML prototype (source of truth for UI edits). */
-export default function HomePage() {
-  redirect("/erp.html");
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const isLoggedIn = cookieStore.get(AUTH_COOKIE)?.value === "1";
+  redirect(isLoggedIn ? "/dashboard" : "/login");
 }

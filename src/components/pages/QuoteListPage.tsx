@@ -30,17 +30,16 @@ export function QuoteListPage() {
 
   return (
     <div className="max-w-[1200px] mx-auto space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <h1 className="text-xl font-bold flex items-center gap-2">
-          <FileText className="w-5 h-5" style={{ color: T.primary }} /> Danh
-          sách báo giá
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
+        <h1 className="font-display text-[26px] font-bold leading-tight flex items-center gap-2">
+          <FileText className="w-5 h-5" /> Danh sách báo giá
         </h1>
         <Link
           href="/dashboard/bao-gia/tao"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium hover:opacity-90"
-          style={{ backgroundColor: T.primary }}
+          className="inline-flex items-center justify-center gap-2 h-12 px-5 rounded-full text-white text-sm font-bold"
+          style={{ backgroundColor: T.ink }}
         >
-          <Plus className="w-4 h-4" /> Tạo báo giá mới
+          <Plus className="w-4 h-4" strokeWidth={2.5} /> Tạo báo giá mới
         </Link>
       </div>
       <SearchInput

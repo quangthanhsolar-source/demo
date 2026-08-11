@@ -1,5 +1,3 @@
-"use client";
-
 import { T } from "@/lib/tokens";
 
 export function FilterTabs({
@@ -12,30 +10,25 @@ export function FilterTabs({
   onChange: (value: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((o) => (
-        <button
-          key={o}
-          type="button"
-          onClick={() => onChange(o)}
-          className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border"
-          style={
-            active === o
-              ? {
-                  backgroundColor: T.primary,
-                  color: "#fff",
-                  borderColor: T.primary,
-                }
-              : {
-                  backgroundColor: "#fff",
-                  color: T.muted,
-                  borderColor: T.border,
-                }
-          }
-        >
-          {o}
-        </button>
-      ))}
+    <div className="flex gap-2 flex-wrap">
+      {options.map((opt) => {
+        const isActive = opt === active;
+        return (
+          <button
+            key={opt}
+            type="button"
+            onClick={() => onChange(opt)}
+            className="h-9 px-4 rounded-full text-[13px] font-semibold transition-colors"
+            style={
+              isActive
+                ? { background: T.ink, color: "#fff" }
+                : { background: T.surface, color: T.ink2 }
+            }
+          >
+            {opt}
+          </button>
+        );
+      })}
     </div>
   );
 }
