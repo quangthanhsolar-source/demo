@@ -9,9 +9,9 @@ export function FormField({
   children: ReactNode;
 }) {
   return (
-    <div className="mb-3">
+    <div className="mb-3.5">
       <label
-        className="text-xs font-medium block mb-1"
+        className="text-[11px] font-bold uppercase tracking-[0.07em] block mb-1.5"
         style={{ color: T.muted }}
       >
         {label}
@@ -22,4 +22,4 @@ export function FormField({
 }
 
 export const inputCls =
-  "w-full px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2";
+  "w-full h-12 px-4 rounded-[14px] text-[15px] border border-transparent focus:outline-none focus:border-[var(--ink)] focus:bg-white bg-[var(--surface)]";

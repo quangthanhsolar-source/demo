@@ -9,12 +9,14 @@ npm install
 npm run dev
 ```
 
-Mở [http://localhost:3000](http://localhost:3000).
+Mở [http://localhost:3000](http://localhost:3000) — App Router với design lime/ink (mobile-first).
 
-## Tài khoản test
+Tài khoản demo:
 
-- Email: `admin@baoduy.com`
+- Email: `admin@quangthanhsolar.com`
 - Mật khẩu: `admin123`
+
+Prototype HTML tham chiếu: [`public/erp.html`](public/erp.html).
 
 Auth hiện dùng cookie tạm (`solar_auth`), chưa có backend thật.
 
