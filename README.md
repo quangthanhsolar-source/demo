@@ -2,16 +2,27 @@
 
 Hệ thống quản lý báo giá NLMT (Next.js App Router) — tách từ prototype SolarERP một file.
 
-## Chạy dự án
+## Xem giao diện prototype (HTML)
+
+Prototype mobile-first mới nhất nằm tại [`public/erp.html`](public/erp.html).
 
 ```bash
 npm install
 npm run dev
 ```
 
-Mở [http://localhost:3000](http://localhost:3000).
+Mở [http://localhost:3000](http://localhost:3000) — trang chủ chuyển thẳng tới `/erp.html`.
 
-## Tài khoản test
+Tài khoản demo trong prototype:
+
+- Email: `admin@quangthanhsolar.com`
+- Mật khẩu: `admin123`
+
+## App Router (Next.js)
+
+Các route React dưới `/login` và `/dashboard/*` vẫn chạy song song để tiếp tục port UI.
+
+Tài khoản test App Router:
 
 - Email: `admin@baoduy.com`
 - Mật khẩu: `admin123`
